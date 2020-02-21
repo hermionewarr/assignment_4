@@ -37,8 +37,10 @@ public:
 		hubble_type = new_type;
 	}
 
-	void print_type() {//could define it here or outside not sure ehwich is better
-		std::cout << "Hubble type: " << hubble_type << std::endl;	}
+	void print_type() {
+		std::cout << "Hubble type: " << hubble_type << std::endl;
+	}
+
 	// Function to print out an object's data
 	void print_data();
 
