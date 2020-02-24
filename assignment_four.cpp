@@ -21,8 +21,8 @@ public:
 	// default constructor
 	galaxy() : hubble_type{ "E[7]" }, stellar_mass_fraction{ 0.01 }, total_mass{ 1e7 }, redshift{ 5 }, satellites{}  {};
 	// Parameterised constructor
-	galaxy(std::string Galaxy_hubble_type, double Galaxy_redshift, double Galaxy_total_mass, double Galaxy_stellar_mass_fraction, std::vector<galaxy> satellites) :
-		hubble_type{ Galaxy_hubble_type }, redshift{ Galaxy_redshift }, total_mass{ Galaxy_total_mass }, stellar_mass_fraction{ Galaxy_stellar_mass_fraction }, satellites{}{}
+	galaxy(std::string Galaxy_hubble_type, double Galaxy_redshift, double Galaxy_total_mass, double Galaxy_stellar_mass_fraction) :
+		hubble_type{ Galaxy_hubble_type }, redshift{ Galaxy_redshift }, total_mass{ Galaxy_total_mass }, stellar_mass_fraction{ Galaxy_stellar_mass_fraction }{}
 	// Destructor
 	~galaxy() { std::cout << "Destroying " << hubble_type << std::endl; }
 
