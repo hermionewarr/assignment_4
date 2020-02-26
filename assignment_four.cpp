@@ -19,7 +19,7 @@ private:
 	double redshift;
 	double total_mass;
 	double stellar_mass_fraction;
-	int number_of_satellites;
+	int number_of_satellites{};
 	std::vector<galaxy> satellites;
 
 public:
@@ -55,22 +55,8 @@ public:
 		number_of_satellites += 1;
 	}
 	int total_number_of_satellites = number_of_satellites;
-	//print satellite data
-	void print_satellite_info();
-};
 
-//print satellite data
-void galaxy::print_satellite_info()
-{
-	if (number_of_satellites != 0) {
-		std::cout << "Galaxy satellites: " << std::endl;
-		int i{ 1 };
-		for (auto satellite_it = satellites.begin(); satellite_it < satellites.end(); ++satellite_it) {
-			std::cout <<"Satellite " << i << " [" << satellite_it -> hubble_type << ", " << satellite_it -> redshift << ", " << satellite_it-> total_mass << ", " << satellite_it-> stellar_mass_fraction << "]" << std::endl;
-			i++;
-		}
-	}
-}
+};
 
 // Print out galaxies data
 void galaxy::print_data()
@@ -81,6 +67,14 @@ void galaxy::print_data()
 	//or could print out sat info here
 	//print satellite data
 	std::cout << "Galaxy has " << number_of_satellites << " satellite(s)." << std::endl;
+	if (number_of_satellites != 0) {
+		std::cout << "Galaxy satellites: " << std::endl;
+		int i{ 1 };
+		for (auto satellite_it = satellites.begin(); satellite_it < satellites.end(); ++satellite_it) {
+			std::cout << "Satellite " << i << " [" << satellite_it->hubble_type << ", " << satellite_it->redshift << ", " << satellite_it->total_mass << ", " << satellite_it->stellar_mass_fraction << "]" << std::endl;
+			i++;
+		}
+	}
 	return;
 }
 
@@ -90,8 +84,8 @@ int main()
 {
 	//define a vector
 	std::vector<galaxy> galaxy_data;
-	std::vector<galaxy>::iterator new_type_pos;
 	int counter{1};
+	int counter_updated{ 1 };
 
 	// Example using default constructor
 	galaxy g1;
@@ -100,11 +94,10 @@ int main()
 	// Example using parameterised constructors
 	galaxy g2("E[1]", 1, 1e12, 0.03);
 	galaxy_data.push_back(g2);
-	galaxy g3("Irr", 2, 1e8, 0.04);
+	galaxy g3("Irr", 2, 1e10, 0.04);
 	galaxy_data.push_back(g3);
 
-	// Add satellite galaxies, types dI, dSph, dE, dS.
-	//satellites of g2
+	// Adding satellite galaxies to g2, types dI, dSph, dE, dS.
 	galaxy_data[1].new_satellites("dSph", 1, 1e8, 0.025);
 	galaxy_data[1].new_satellites("dI", 2, 5e9, 0.04);
 
@@ -113,7 +106,6 @@ int main()
 	for (auto galaxy_it = galaxy_data.begin(); galaxy_it < galaxy_data.end(); ++galaxy_it) {
 		std::cout << "Galaxy " << counter << " ";
 		galaxy_it->print_data();
-		galaxy_it->print_satellite_info();
 		// Get and print out stellar mass
 		std::cout << "Stellar mass of galaxy " << counter << " is: " << galaxy_it->stellar_mass() << std::endl;
 		counter++;
@@ -123,19 +115,15 @@ int main()
 	g3.change_type("S0");
 	std::cout << "Galaxy 3's hubble type has changed to " ;
 	g3.print_type();
-	//galaxy_data.pop_back();
-	new_type_pos = galaxy_data.begin();
-	galaxy_data.erase(new_type_pos+2);
+	galaxy_data.erase(galaxy_data.begin() + 2);
 	galaxy_data.push_back(g3);
 
-	//to show the updated vector
+	//to show the updated galaxy data
 	std::cout << "\nUpdated galaxy data: " << std::endl;
 	for (auto galaxy_it = galaxy_data.begin(); galaxy_it < galaxy_data.end(); ++galaxy_it) {
-		std::cout << "Galaxy " << counter <<" " ;
+		std::cout << "Galaxy " << counter_updated <<" " ;
 		galaxy_it->print_data();
-		galaxy_it->print_satellite_info();
-		counter++;
+		counter_updated++;
 	}	
 	return 0;
 }
-
