@@ -64,7 +64,6 @@ void galaxy::print_data()
 	std::cout.precision(3); // 2 significant figures
 	std::cout << "[hubble type, stellar mass, redshift, total mass] = [" << hubble_type << ", "
 		<< stellar_mass() << ", " << redshift << ", " << total_mass << "]" << std::endl;
-	//or could print out sat info here
 	//print satellite data
 	std::cout << "Galaxy has " << number_of_satellites << " satellite(s)." << std::endl;
 	if (number_of_satellites != 0) {
